@@ -88,17 +88,20 @@ class BaseInterface(object):
 
     def request_songinfo(self, song):
         url = "http://musicmini.baidu.com/app/link/getLinks.php"
-        data = dict(songId=song['sid'],
+        data = dict(songsiId=song['sid'],
                     songArtist=song['artist'],
                     songTitle=song['title'],
+                    songAppend="",
                     linkType=self.link_type,
-                    isLogin=self.is_login,
-                    clientVer=self.client_version,
+                    isHq=self.is_hq_enabled,
                     isCloud=self.is_cloud,
-                    isHq=self.is_hq_enabled
+                    hasMV=0,
+                    noFlac=0,
+                    rate=0
                     )
         params = {'param' : base64.b64encode(json.dumps(data))}
-        ret = public_curl.request(url, params, method="POST")
+        header = {"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"}
+        ret = public_curl.request(url, params, method="POST", header=header)
         pret = parser_json(ret)
         if len(pret) > 0:
             return parse_to_dsong(pret[0], song)
