@@ -206,6 +206,8 @@ class MusicBrowser(gtk.VBox):
         
     def injection_css(self):    
         try:
+            self.js_context.document.getElementById("centerFrame").style.margin = "0px"
+            self.js_context.document.getElementsByClassName("update_tip")[0].style.display = "none"
             self.js_context.window.frames['centerFrame'].document.querySelector('#mainDiv').style.height = "405px"
-            self.js_context.document.getElementById("mainDiv").style.height = "405px"
+            #self.js_context.document.getElementById("mainDiv").style.height = "405px"
         except: pass
