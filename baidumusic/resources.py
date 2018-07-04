@@ -194,4 +194,3 @@ class BaseInterface(object):
     def get_bduss(self):
         url = "http://musicmini.baidu.com/app/passport/getBDUSS.php"
         return public_curl.request(url)
-        
